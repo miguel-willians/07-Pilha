@@ -59,7 +59,7 @@ void menu()
 void inicializar()
 {
 
-	// se a lista j� possuir elementos
+	// se a lista já possuir elementos
 	// libera a memoria ocupada
 	NO* aux = topo;
 	while (aux != NULL) {
@@ -74,26 +74,42 @@ void inicializar()
 }
 
 
+
 void push()
 {
 	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
+	cout << "Digite o elemento: ";
+	cin >> novo->valor;
+	
+	
 	if (novo == NULL)
 	{
 		return;
 	}
 
-	cout << "Digite o elemento: ";
-	cin >> novo->valor;
-	novo->prox = NULL;
-
-
+	if (topo == NULL) {
+		novo->prox = NULL;
+		topo = novo;
+	}
+	
+	else {
+		novo->prox = topo;
+		topo = novo;
+	}
 }
 
 void pop()
 {
-
-	
-
+	if (topo != NULL) {
+		NO* aux = topo;
+		topo = topo->prox;
+		cout << "Elemento a ser removido:" << aux->valor << endl;
+		free(aux);
+	}
+	else {
+		cout << "Lista vazia, impossível excluir." << endl;
+	}
 }
+
 
